@@ -6,6 +6,9 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  tab1Root: string = "Location";
+  tab2Root: string = "MyDetails";
+  tab3Root: string = "CampDetails";
 
   constructor(public navCtrl: NavController) {
 
