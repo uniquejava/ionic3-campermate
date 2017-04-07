@@ -63,4 +63,37 @@ copy images to src/assets directory
 
 
 
+## Form Builder vs. [(ngModel)]
+1. 所有的inputs自动变成controls (还记得giflist中那个Fancy Searchbox么?)
+2. 可以使用各种Validators.
 
+### How to
+1. 将所有的ion-item挪到form下, 结构:`ion-list>form>ion-item*n>ion-label[stacked]+ion-input`.
+2. 给form加上[formGroup]="myForm"属性, 并监听(change)或(submit)="saveForm()"事件(监听change能实现自动保存form的功能,但一般都会监听submit)
+3. 给所有的input指定formControlName属性
+4. 在对应的类中定义myForm: FormGroup属性, 并在constructor中给this.myForm设置初始值.
+5. 在saveForm中使用this.myForm.value得到用户输入的值.
+
+
+```html
+<form [formGroup]="myForm" (change)="saveForm()"></form>
+```
+
+```js
+export class CampDetails {
+  myForm: FormGroup;
+
+  constructor(... public formBuilder: FormBuilder) {
+    this.myForm = formBuilder.group({
+      field1: ['5431', Validators.required],
+      field2: [''],
+      field3: ['']
+    });
+  }
+
+  saveForm(): void {
+    let data = this.myForm.value;
+    this.dataService.saveData(data);
+  }
+}
+```

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {FormBuilder} from "@angular/forms";
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Data} from "../../providers/data";
 
 /**
@@ -15,8 +15,17 @@ import {Data} from "../../providers/data";
   templateUrl: 'camp-details.html',
 })
 export class CampDetails {
+  myForm: FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public dataService: Data) {
+    this.myForm = formBuilder.group({
+      gateAccessCode: ['54321', Validators.required],
+      amenitiesCode: [''],
+      wifiPassword: [''],
+      phoneNumber: [''],
+      departure: [''],
+      notes: ['']
+    });
   }
 
   ionViewDidLoad() {
@@ -24,6 +33,7 @@ export class CampDetails {
   }
 
   saveForm(): void {
-
+    let data = this.myForm.value;
+    console.log(data);
   }
 }
