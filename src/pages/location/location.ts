@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ElementRef, ViewChild} from '@angular/core';
+import {AlertController, IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
+import {GoogleMaps} from "../../providers/google-maps";
+import {Data} from "../../providers/data";
+import {Geolocation} from "@ionic-native/geolocation";
 
 /**
  * Generated class for the Location page.
@@ -13,12 +16,31 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'location.html',
 })
 export class Location {
+  @ViewChild('map') mapElement: ElementRef;
+  @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  latitude: number;
+  longitude: number;
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public maps: GoogleMaps,
+              public platform: Platform,
+              public dataService: Data,
+              public alertCtrl: AlertController,
+              public geolocation: Geolocation) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Location');
+  }
+
+  setLocation(): void {
+
+  }
+
+  takeMeHome(): void {
+
   }
 
 }

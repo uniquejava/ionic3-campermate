@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {FormBuilder} from "@angular/forms";
+import {Data} from "../../providers/data";
 
 /**
  * Generated class for the MyDetails page.
@@ -14,11 +16,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class MyDetails {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public dateService: Data) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyDetails');
+  }
+
+  saveForm(): void {
+
   }
 
 }
