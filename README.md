@@ -3,6 +3,13 @@ campermate
 ionic3.0.1刚刚发布, 但是用ionic g page命令生成的代码有bug: https://github.com/driftyco/ionic-cli/issues/2070, 
 需要将生成的IonicModule.forChild修改成IonicPageModule.forChild
 
+## Tech stack
+
+* Ionic3.0.1(Lazy Load)
+* FormBuilder
+* network availability
+* Google maps
+
 ### 1. setup (plugins)
 ```sh
 ionic start campermate blank --v2
@@ -97,3 +104,10 @@ export class CampDetails {
   }
 }
 ```
+
+### 检查网络状态
+见connectivity.ts
+
+### google maps
+有两种方式: 一种是native的, 需要安装google maps cordova plugin, 另一种是引入google map javascript SDK, 本示例使用的后一种.
+
