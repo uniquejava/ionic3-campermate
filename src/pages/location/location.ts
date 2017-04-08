@@ -32,10 +32,23 @@ export class Location {
   }
 
   ionViewDidLoad() {
-    this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement).then(_ => {
-      // this.maps.changeMarker(this.latitude, this.longitude);
-    });
+    this.platform.ready().then(_ => {
+      this.dataService.getLocation().then(location => {
+        let savedLocation: any = false;
+        if (location && typeof location != "undefined") {
+          savedLocation = JSON.parse(location);
+        }
 
+        let mapLoaded = this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement).then(_ => {
+          if (savedLocation) {
+            this.latitude = savedLocation.latitude;
+            this.longitude = savedLocation.longitude;
+
+            this.maps.changeMarker(this.latitude, this.longitude);
+          }
+        });
+      })
+    });
   }
 
   setLocation(): void {
@@ -48,7 +61,7 @@ export class Location {
         latitude: this.latitude,
         longitude: this.longitude
       };
-      // this.dataService.setLocation(data);
+      this.dataService.setLocation(data);
 
       let alert = this.alertCtrl.create({
         title: 'Location set!',
